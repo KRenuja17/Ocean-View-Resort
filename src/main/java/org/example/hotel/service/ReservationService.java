@@ -34,7 +34,16 @@ public class ReservationService {
         BigDecimal total = rate.multiply(new BigDecimal(nights));
         reservation.setTotalAmount(total);
 
-        reservationDao.create(reservation);
+        try {
+            reservationDao.create(reservation);
+        } catch (RuntimeException e) {
+            if (e.getCause() instanceof java.sql.SQLIntegrityConstraintViolationException) {
+                errors.add("Reservation number " + reservation.getReservationNumber() + " already exists.");
+                return errors;
+            } else {
+                throw e;
+            }
+        }
         return errors;
     }
 
@@ -78,4 +87,3 @@ public class ReservationService {
         return s == null || s.trim().isEmpty();
     }
 }
-

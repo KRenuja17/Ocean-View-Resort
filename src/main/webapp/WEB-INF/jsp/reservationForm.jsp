@@ -24,16 +24,6 @@
                 <div class="card-body">
                     <h1 class="h4 mb-3">New Reservation</h1>
 
-                    <c:if test="${not empty errors}">
-                        <div class="alert alert-danger error">
-                            <ul class="mb-0">
-                                <c:forEach items="${errors}" var="err">
-                                    <li>${err}</li>
-                                </c:forEach>
-                            </ul>
-                        </div>
-                    </c:if>
-
                     <form method="post" action="${pageContext.request.contextPath}/reservations" class="mt-3">
                         <div class="row g-3">
                             <div class="col-md-6">
@@ -101,7 +91,52 @@
     </div>
 </div>
 
+<c:if test="${not empty errors}">
+    <!-- Friendly pop-up modal for validation errors -->
+    <div class="modal" id="reservationErrorModal" tabindex="-1"
+         aria-labelledby="reservationErrorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title" id="reservationErrorModalLabel">
+                        Please fix the following before continuing
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="mb-0">
+                        <c:forEach items="${errors}" var="err">
+                            <li>${err}</li>
+                        </c:forEach>
+                    </ul>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                        Got it
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</c:if>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<c:if test="${not empty errors}">
+    <script>
+        (function () {
+            document.addEventListener('DOMContentLoaded', function () {
+                var modalEl = document.getElementById('reservationErrorModal');
+                if (modalEl && window.bootstrap && typeof bootstrap.Modal === 'function') {
+                    var instance = bootstrap.Modal.getOrCreateInstance(modalEl, {
+                        backdrop: 'static',
+                        keyboard: true
+                    });
+                    instance.show();
+                }
+            });
+        })();
+    </script>
+</c:if>
 </body>
 </html>
-
