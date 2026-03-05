@@ -51,6 +51,8 @@ public class ReportServlet extends HttpServlet {
             }
         } else if ("currentStays".equals(reportType)) {
             results = reservationDao.findCurrentStays(LocalDate.now());
+        } else if ("allReservations".equals(reportType)) {
+            results = reservationDao.findAll();
         }
 
         req.setAttribute("reservations", results);
@@ -67,4 +69,3 @@ public class ReportServlet extends HttpServlet {
         return true;
     }
 }
-

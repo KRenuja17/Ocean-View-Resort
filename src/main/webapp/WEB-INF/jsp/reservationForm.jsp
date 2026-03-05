@@ -51,16 +51,11 @@
                         <input type="hidden" name="action" value="${isEdit ? 'update' : 'create'}"/>
 
                         <div class="row g-4">
-                            <!-- Reservation Number -->
-                            <div class="col-md-6">
-                                <label class="form-label text-uppercase small text-muted">Reservation #</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-hash"></i></span>
-                                    <input type="text" class="form-control border-start-0 ps-0" name="reservationNumber" required
-                                           placeholder="e.g. OVRN1001"
-                                           value="${reservation.reservationNumber}"
-                                           readonly/>
-                                </div>
+                            <!-- Section: Guest Information -->
+                            <div class="col-12">
+                                <h6 class="text-primary fw-bold text-uppercase small mb-2 border-bottom pb-2">
+                                    <i class="bi bi-person-lines-fill me-2"></i>Guest Information
+                                </h6>
                             </div>
 
                             <!-- Guest Name -->
@@ -71,17 +66,6 @@
                                     <input type="text" class="form-control border-start-0 ps-0" name="guestName" required
                                            placeholder="Full Name"
                                            value="${reservation.guestName}"/>
-                                </div>
-                            </div>
-
-                            <!-- Address -->
-                            <div class="col-12">
-                                <label class="form-label text-uppercase small text-muted">Address</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-geo-alt"></i></span>
-                                    <input type="text" class="form-control border-start-0 ps-0" name="address" required
-                                           placeholder="e.g. 123 Galle Road, Colombo 03"
-                                           value="${reservation.address}"/>
                                 </div>
                             </div>
 
@@ -96,6 +80,36 @@
                                 </div>
                             </div>
 
+                            <!-- Address -->
+                            <div class="col-12">
+                                <label class="form-label text-uppercase small text-muted">Address</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-geo-alt"></i></span>
+                                    <input type="text" class="form-control border-start-0 ps-0" name="address" required
+                                           placeholder="e.g. 123 Galle Road, Colombo 03"
+                                           value="${reservation.address}"/>
+                                </div>
+                            </div>
+
+                            <!-- Section: Booking Details -->
+                            <div class="col-12 mt-4">
+                                <h6 class="text-primary fw-bold text-uppercase small mb-2 border-bottom pb-2">
+                                    <i class="bi bi-calendar-check me-2"></i>Booking Details
+                                </h6>
+                            </div>
+
+                            <!-- Reservation Number -->
+                            <div class="col-md-6">
+                                <label class="form-label text-uppercase small text-muted">Reservation #</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-hash"></i></span>
+                                    <input type="text" class="form-control border-start-0 ps-0" name="reservationNumber" required
+                                           placeholder="e.g. OVRN1001"
+                                           value="${reservation.reservationNumber}"
+                                           readonly/>
+                                </div>
+                            </div>
+
                             <!-- Room Type -->
                             <div class="col-md-6">
                                 <label class="form-label text-uppercase small text-muted">Room Type</label>
@@ -103,9 +117,9 @@
                                     <span class="input-group-text bg-light border-end-0"><i class="bi bi-door-closed"></i></span>
                                     <select class="form-select border-start-0 ps-0" name="roomType" required>
                                         <option value="">-- Select Room --</option>
-                                        <option value="STANDARD" <c:if test="${reservation.roomType == 'STANDARD'}">selected</c:if>>Standard Room</option>
-                                        <option value="DELUXE" <c:if test="${reservation.roomType == 'DELUXE'}">selected</c:if>>Deluxe Room</option>
-                                        <option value="SUITE" <c:if test="${reservation.roomType == 'SUITE'}">selected</c:if>>Suite</option>
+                                        <option value="STANDARD" <c:if test="${reservation.roomType == 'STANDARD'}">selected</c:if>>Standard Room (LKR 15,000/night)</option>
+                                        <option value="DELUXE" <c:if test="${reservation.roomType == 'DELUXE'}">selected</c:if>>Deluxe Room (LKR 25,000/night)</option>
+                                        <option value="SUITE" <c:if test="${reservation.roomType == 'SUITE'}">selected</c:if>>Suite (LKR 40,000/night)</option>
                                     </select>
                                 </div>
                             </div>
@@ -174,7 +188,7 @@
                 </div>
                 <div class="modal-footer border-0 pt-0">
                     <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal">
-                        Okay, I'll fix it
+                        Okay
                     </button>
                 </div>
             </div>

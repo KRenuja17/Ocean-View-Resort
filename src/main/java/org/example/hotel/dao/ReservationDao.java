@@ -16,6 +16,8 @@ public interface ReservationDao {
 
     Optional<Reservation> findByReservationNumber(String reservationNumber);
 
+    List<Reservation> findAll();
+
     List<Reservation> findByCheckInDateRange(LocalDate from, LocalDate to);
 
     List<Reservation> findCurrentStays(LocalDate today);

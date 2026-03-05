@@ -36,7 +36,7 @@
                             <div class="input-group">
                                 <span class="input-group-text bg-light border-end-0"><i class="bi bi-search"></i></span>
                                 <input type="text" class="form-control border-start-0 ps-0" name="reservationNumber" required
-                                       placeholder="Enter reservation ID (e.g. RES-1001)"
+                                       placeholder="Enter reservation ID (e.g. OVRN123)"
                                        value="${param.reservationNumber}"/>
                             </div>
                         </div>

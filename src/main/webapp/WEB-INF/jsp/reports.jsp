@@ -65,23 +65,23 @@
                     </div>
                 </div>
 
-                <!-- Current Stays Report Card -->
+                <!-- All Reservations Report Card -->
                 <div class="col-md-6">
                     <div class="card h-100 shadow-sm border-0">
                         <div class="card-header bg-white border-bottom-0 pt-4 pb-0">
                             <div class="d-flex align-items-center gap-2 mb-1">
                                 <div class="bg-success bg-opacity-10 p-2 rounded">
-                                    <i class="bi bi-house-door text-success"></i>
+                                    <i class="bi bi-list-ul text-success"></i>
                                 </div>
-                                <h5 class="mb-0 fw-bold">In-House Guests</h5>
+                                <h5 class="mb-0 fw-bold">All Reservations</h5>
                             </div>
-                            <p class="text-muted small ms-5">List all guests currently staying at the resort.</p>
+                            <p class="text-muted small ms-5">View a complete list of all reservations in the system.</p>
                         </div>
                         <div class="card-body pt-2 d-flex align-items-end">
                             <form method="post" action="${pageContext.request.contextPath}/reports" class="w-100">
-                                <input type="hidden" name="reportType" value="currentStays"/>
+                                <input type="hidden" name="reportType" value="allReservations"/>
                                 <button type="submit" class="btn btn-outline-success w-100">
-                                    Show Current Stays
+                                    View All Reservations
                                 </button>
                             </form>
                         </div>

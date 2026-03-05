@@ -36,6 +36,9 @@ public class ReservationDaoImpl implements ReservationDao {
     private static final String SELECT_LAST_ID_SQL =
             "SELECT MAX(id) FROM reservations";
 
+    private static final String SELECT_ALL_SQL =
+            "SELECT * FROM reservations ORDER BY check_in DESC";
+
     @Override
     public void create(Reservation reservation) {
         try (Connection conn = DbUtil.getConnection();
@@ -103,6 +106,22 @@ public class ReservationDaoImpl implements ReservationDao {
             throw new RuntimeException("Error finding reservation", e);
         }
         return Optional.empty();
+    }
+
+    @Override
+    public List<Reservation> findAll() {
+        List<Reservation> list = new ArrayList<>();
+        try (Connection conn = DbUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SELECT_ALL_SQL);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                list.add(mapRow(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding all reservations", e);
+        }
+        return list;
     }
 
     @Override
