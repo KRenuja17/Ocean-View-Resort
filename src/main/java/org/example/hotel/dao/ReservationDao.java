@@ -19,4 +19,6 @@ public interface ReservationDao {
     List<Reservation> findByCheckInDateRange(LocalDate from, LocalDate to);
 
     List<Reservation> findCurrentStays(LocalDate today);
+
+    int getLastId();
 }

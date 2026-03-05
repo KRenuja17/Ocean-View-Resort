@@ -33,6 +33,9 @@ public class ReservationDaoImpl implements ReservationDao {
     private static final String SELECT_CURRENT_STAYS_SQL =
             "SELECT * FROM reservations WHERE ? BETWEEN check_in AND DATE_SUB(check_out, INTERVAL 1 DAY) ORDER BY check_in";
 
+    private static final String SELECT_LAST_ID_SQL =
+            "SELECT MAX(id) FROM reservations";
+
     @Override
     public void create(Reservation reservation) {
         try (Connection conn = DbUtil.getConnection();
@@ -137,6 +140,21 @@ public class ReservationDaoImpl implements ReservationDao {
             throw new RuntimeException("Error finding current stays", e);
         }
         return list;
+    }
+
+    @Override
+    public int getLastId() {
+        try (Connection conn = DbUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SELECT_LAST_ID_SQL);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error getting last reservation ID", e);
+        }
+        return 0;
     }
 
     private Reservation mapRow(ResultSet rs) throws SQLException {

@@ -76,6 +76,11 @@ public class ReservationService {
         return reservationDao.findByReservationNumber(reservationNumber);
     }
 
+    public String generateReservationNumber() {
+        int lastId = reservationDao.getLastId();
+        return "OVRN" + (lastId + 1);
+    }
+
     private List<String> validate(Reservation r) {
         List<String> errors = new ArrayList<>();
 

@@ -43,6 +43,10 @@ public class ReservationServlet extends HttpServlet {
                 resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Reservation not found");
             }
         } else {
+            // New reservation: Generate ID
+            Reservation reservation = new Reservation();
+            reservation.setReservationNumber(reservationService.generateReservationNumber());
+            req.setAttribute("reservation", reservation);
             req.getRequestDispatcher("/WEB-INF/jsp/reservationForm.jsp").forward(req, resp);
         }
     }

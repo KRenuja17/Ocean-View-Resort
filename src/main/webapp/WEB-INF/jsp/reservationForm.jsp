@@ -57,9 +57,9 @@
                                 <div class="input-group">
                                     <span class="input-group-text bg-light border-end-0"><i class="bi bi-hash"></i></span>
                                     <input type="text" class="form-control border-start-0 ps-0" name="reservationNumber" required
-                                           placeholder="e.g. RES-1001"
+                                           placeholder="e.g. OVRN1001"
                                            value="${reservation.reservationNumber}"
-                                           <c:if test="${isEdit}">readonly</c:if>/>
+                                           readonly/>
                                 </div>
                             </div>
 
