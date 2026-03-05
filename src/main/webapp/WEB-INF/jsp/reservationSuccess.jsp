@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="col-6 text-end">
                                     <div class="text-uppercase small text-muted mb-1">Total Amount</div>
-                                    <div class="fw-bold text-primary">Rs. ${reservation.totalAmount}</div>
+                                    <div class="fw-bold text-primary">LKR ${reservation.totalAmount}</div>
                                 </div>
                                 <div class="col-12"><hr class="my-1 opacity-25"></div>
                                 <div class="col-12">

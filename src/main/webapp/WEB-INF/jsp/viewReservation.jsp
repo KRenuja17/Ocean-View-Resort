@@ -111,7 +111,7 @@
 
                             <div class="col-12 d-flex justify-content-between align-items-center bg-light p-3 rounded">
                                 <span class="fw-bold text-muted">Total Amount</span>
-                                <span class="fw-bold fs-4 text-primary">Rs. ${reservation.totalAmount}</span>
+                                <span class="fw-bold fs-4 text-primary">LKR ${reservation.totalAmount}</span>
                             </div>
                         </div>
 

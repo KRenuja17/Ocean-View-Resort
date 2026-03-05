@@ -119,7 +119,7 @@
                                         <div class="text-muted small">Accommodation for ${nights} nights</div>
                                     </td>
                                     <td class="text-end py-3">${nights}</td>
-                                    <td class="text-end pe-4 py-3 fw-bold">Rs. ${reservation.totalAmount}</td>
+                                    <td class="text-end pe-4 py-3 fw-bold">LKR ${reservation.totalAmount}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -132,15 +132,15 @@
                         <div class="col-md-5">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <span class="text-muted">Subtotal</span>
-                                <span class="fw-bold">Rs. ${reservation.totalAmount}</span>
+                                <span class="fw-bold">LKR ${reservation.totalAmount}</span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <span class="text-muted">Tax (0%)</span>
-                                <span class="fw-bold">Rs. 0.00</span>
+                                <span class="fw-bold">LKR 0.00</span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center p-3 bg-primary bg-opacity-10 rounded">
                                 <span class="h5 mb-0 text-primary fw-bold">Total Due</span>
-                                <span class="h4 mb-0 text-primary fw-bold">Rs. ${reservation.totalAmount}</span>
+                                <span class="h4 mb-0 text-primary fw-bold">LKR ${reservation.totalAmount}</span>
                             </div>
                         </div>
                     </div>

@@ -125,7 +125,7 @@
                                             <td><span class="badge bg-light text-dark border">${r.roomType}</span></td>
                                             <td>${r.checkIn}</td>
                                             <td>${r.checkOut}</td>
-                                            <td class="pe-4 text-end fw-bold">Rs. ${r.totalAmount}</td>
+                                            <td class="pe-4 text-end fw-bold">LKR ${r.totalAmount}</td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
