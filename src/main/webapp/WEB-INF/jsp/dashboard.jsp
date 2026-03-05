@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <div class="row g-4">
+    <div class="row g-4 justify-content-center">
         <!-- New Reservation -->
         <div class="col-md-6 col-lg-4">
             <a href="${pageContext.request.contextPath}/reservations" class="text-decoration-none">
@@ -65,22 +65,7 @@
                             <i class="bi bi-search"></i>
                         </div>
                         <h3 class="h5 fw-bold text-dark">Find Reservation</h3>
-                        <p class="text-muted small">Search and view existing booking details.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <!-- Billing -->
-        <div class="col-md-6 col-lg-4">
-            <a href="${pageContext.request.contextPath}/reservation/view" class="text-decoration-none">
-                <div class="card h-100 border-0 shadow-sm hover-lift">
-                    <div class="card-body p-4 text-center">
-                        <div class="display-4 text-success mb-3">
-                            <i class="bi bi-receipt"></i>
-                        </div>
-                        <h3 class="h5 fw-bold text-dark">Billing & Checkout</h3>
-                        <p class="text-muted small">Calculate totals and print guest bills.</p>
+                        <p class="text-muted small">Search, edit, delete, and print bills.</p>
                     </div>
                 </div>
             </a>
