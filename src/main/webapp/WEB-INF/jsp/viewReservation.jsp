@@ -111,7 +111,7 @@
 
                             <div class="col-12 d-flex justify-content-between align-items-center bg-light p-3 rounded">
                                 <span class="fw-bold text-muted">Total Amount</span>
-                                <span class="fw-bold fs-4 text-primary">$${reservation.totalAmount}</span>
+                                <span class="fw-bold fs-4 text-primary">Rs. ${reservation.totalAmount}</span>
                             </div>
                         </div>
 
@@ -119,6 +119,17 @@
                             <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/dashboard">
                                 Close
                             </a>
+                            <a class="btn btn-warning"
+                               href="${pageContext.request.contextPath}/reservations?action=edit&reservationNumber=${reservation.reservationNumber}">
+                                <i class="bi bi-pencil"></i> Edit
+                            </a>
+                            <form method="post" action="${pageContext.request.contextPath}/reservations" onsubmit="return confirm('Are you sure you want to delete this reservation?');" style="display:inline;">
+                                <input type="hidden" name="action" value="delete"/>
+                                <input type="hidden" name="reservationNumber" value="${reservation.reservationNumber}"/>
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </form>
                             <a class="btn btn-primary"
                                href="${pageContext.request.contextPath}/reservation/bill?reservationNumber=${reservation.reservationNumber}">
                                 <i class="bi bi-receipt"></i> Generate Bill

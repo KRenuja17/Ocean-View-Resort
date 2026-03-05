@@ -10,10 +10,13 @@ public interface ReservationDao {
 
     void create(Reservation reservation);
 
+    void update(Reservation reservation);
+
+    void delete(String reservationNumber);
+
     Optional<Reservation> findByReservationNumber(String reservationNumber);
 
     List<Reservation> findByCheckInDateRange(LocalDate from, LocalDate to);
 
     List<Reservation> findCurrentStays(LocalDate today);
 }
-

@@ -18,6 +18,12 @@ public class ReservationDaoImpl implements ReservationDao {
             "INSERT INTO reservations (reservation_number, guest_name, address, contact_number, room_type, check_in, check_out, total_amount) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
+    private static final String UPDATE_SQL =
+            "UPDATE reservations SET guest_name = ?, address = ?, contact_number = ?, room_type = ?, check_in = ?, check_out = ?, total_amount = ? WHERE reservation_number = ?";
+
+    private static final String DELETE_SQL =
+            "DELETE FROM reservations WHERE reservation_number = ?";
+
     private static final String SELECT_BY_RES_NO_SQL =
             "SELECT * FROM reservations WHERE reservation_number = ?";
 
@@ -44,6 +50,38 @@ public class ReservationDaoImpl implements ReservationDao {
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Error creating reservation", e);
+        }
+    }
+
+    @Override
+    public void update(Reservation reservation) {
+        try (Connection conn = DbUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(UPDATE_SQL)) {
+
+            ps.setString(1, reservation.getGuestName());
+            ps.setString(2, reservation.getAddress());
+            ps.setString(3, reservation.getContactNumber());
+            ps.setString(4, reservation.getRoomType());
+            ps.setDate(5, Date.valueOf(reservation.getCheckIn()));
+            ps.setDate(6, Date.valueOf(reservation.getCheckOut()));
+            ps.setBigDecimal(7, reservation.getTotalAmount());
+            ps.setString(8, reservation.getReservationNumber());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating reservation", e);
+        }
+    }
+
+    @Override
+    public void delete(String reservationNumber) {
+        try (Connection conn = DbUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(DELETE_SQL)) {
+
+            ps.setString(1, reservationNumber);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting reservation", e);
         }
     }
 
@@ -115,4 +153,3 @@ public class ReservationDaoImpl implements ReservationDao {
         return r;
     }
 }
-

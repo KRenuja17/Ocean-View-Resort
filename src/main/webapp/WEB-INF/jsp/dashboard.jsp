@@ -86,7 +86,8 @@
             </a>
         </div>
 
-        <!-- Reports -->
+        <!-- Reports (Admin Only) -->
+        <% if (currentUser != null && "ADMIN".equals(currentUser.getRole())) { %>
         <div class="col-md-6 col-lg-4">
             <a href="${pageContext.request.contextPath}/reports" class="text-decoration-none">
                 <div class="card h-100 border-0 shadow-sm hover-lift">
@@ -100,6 +101,7 @@
                 </div>
             </a>
         </div>
+        <% } %>
 
         <!-- Help -->
         <div class="col-md-6 col-lg-4">

@@ -4,7 +4,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New Reservation - Ocean View</title>
+    <title>
+        <c:choose>
+            <c:when test="${isEdit}">Edit Reservation - Ocean View</c:when>
+            <c:otherwise>New Reservation - Ocean View</c:otherwise>
+        </c:choose>
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -28,11 +33,23 @@
         <div class="col-lg-8">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-white border-bottom-0 pt-4 pb-0">
-                    <h1 class="h3 mb-0 fw-bold text-primary">New Reservation</h1>
-                    <p class="text-muted small">Enter guest details to create a booking.</p>
+                    <h1 class="h3 mb-0 fw-bold text-primary">
+                        <c:choose>
+                            <c:when test="${isEdit}">Edit Reservation</c:when>
+                            <c:otherwise>New Reservation</c:otherwise>
+                        </c:choose>
+                    </h1>
+                    <p class="text-muted small">
+                        <c:choose>
+                            <c:when test="${isEdit}">Update guest details for this booking.</c:when>
+                            <c:otherwise>Enter guest details to create a booking.</c:otherwise>
+                        </c:choose>
+                    </p>
                 </div>
                 <div class="card-body p-4">
                     <form method="post" action="${pageContext.request.contextPath}/reservations">
+                        <input type="hidden" name="action" value="${isEdit ? 'update' : 'create'}"/>
+
                         <div class="row g-4">
                             <!-- Reservation Number -->
                             <div class="col-md-6">
@@ -41,7 +58,8 @@
                                     <span class="input-group-text bg-light border-end-0"><i class="bi bi-hash"></i></span>
                                     <input type="text" class="form-control border-start-0 ps-0" name="reservationNumber" required
                                            placeholder="e.g. RES-1001"
-                                           value="${reservation.reservationNumber}"/>
+                                           value="${reservation.reservationNumber}"
+                                           <c:if test="${isEdit}">readonly</c:if>/>
                                 </div>
                             </div>
 
@@ -62,7 +80,7 @@
                                 <div class="input-group">
                                     <span class="input-group-text bg-light border-end-0"><i class="bi bi-geo-alt"></i></span>
                                     <input type="text" class="form-control border-start-0 ps-0" name="address" required
-                                           placeholder="Street Address, City, Zip"
+                                           placeholder="e.g. 123 Galle Road, Colombo 03"
                                            value="${reservation.address}"/>
                                 </div>
                             </div>
@@ -73,7 +91,7 @@
                                 <div class="input-group">
                                     <span class="input-group-text bg-light border-end-0"><i class="bi bi-telephone"></i></span>
                                     <input type="text" class="form-control border-start-0 ps-0" name="contactNumber" required
-                                           placeholder="+1 (555) 000-0000"
+                                           placeholder="e.g. 077 123 4567"
                                            value="${reservation.contactNumber}"/>
                                 </div>
                             </div>
@@ -118,7 +136,11 @@
                                 <i class="bi bi-x-circle"></i> Cancel
                             </a>
                             <button type="submit" class="btn btn-primary px-5 py-2 shadow-sm">
-                                <i class="bi bi-check-lg"></i> Save Reservation
+                                <i class="bi bi-check-lg"></i>
+                                <c:choose>
+                                    <c:when test="${isEdit}">Update Reservation</c:when>
+                                    <c:otherwise>Save Reservation</c:otherwise>
+                                </c:choose>
                             </button>
                         </div>
                     </form>

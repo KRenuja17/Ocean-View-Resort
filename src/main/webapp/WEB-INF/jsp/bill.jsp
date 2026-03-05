@@ -59,9 +59,9 @@
                                 <span class="h3 fw-bold text-dark mb-0">Ocean View Resort</span>
                             </div>
                             <p class="text-muted small mb-0">
-                                123 Seaside Avenue<br>
-                                Ocean City, FL 33139<br>
-                                +1 (555) 123-4567
+                                123 Galle Road<br>
+                                Colombo 03, Sri Lanka<br>
+                                +94 11 234 5678
                             </p>
                         </div>
                         <div class="text-end">
@@ -119,7 +119,7 @@
                                         <div class="text-muted small">Accommodation for ${nights} nights</div>
                                     </td>
                                     <td class="text-end py-3">${nights}</td>
-                                    <td class="text-end pe-4 py-3 fw-bold">$${reservation.totalAmount}</td>
+                                    <td class="text-end pe-4 py-3 fw-bold">Rs. ${reservation.totalAmount}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -132,15 +132,15 @@
                         <div class="col-md-5">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <span class="text-muted">Subtotal</span>
-                                <span class="fw-bold">$${reservation.totalAmount}</span>
+                                <span class="fw-bold">Rs. ${reservation.totalAmount}</span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <span class="text-muted">Tax (0%)</span>
-                                <span class="fw-bold">$0.00</span>
+                                <span class="fw-bold">Rs. 0.00</span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center p-3 bg-primary bg-opacity-10 rounded">
                                 <span class="h5 mb-0 text-primary fw-bold">Total Due</span>
-                                <span class="h4 mb-0 text-primary fw-bold">$${reservation.totalAmount}</span>
+                                <span class="h4 mb-0 text-primary fw-bold">Rs. ${reservation.totalAmount}</span>
                             </div>
                         </div>
                     </div>

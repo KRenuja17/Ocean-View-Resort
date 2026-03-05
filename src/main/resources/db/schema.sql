@@ -12,6 +12,10 @@ INSERT INTO users (username, password, role)
 VALUES ('admin', 'admin123', 'ADMIN')
 ON DUPLICATE KEY UPDATE username = username;
 
+INSERT INTO users (username, password, role)
+VALUES ('manager', 'manager123', 'MANAGER')
+ON DUPLICATE KEY UPDATE username = username;
+
 CREATE TABLE IF NOT EXISTS reservations (
   id INT AUTO_INCREMENT PRIMARY KEY,
   reservation_number VARCHAR(30) NOT NULL UNIQUE,
@@ -24,4 +28,3 @@ CREATE TABLE IF NOT EXISTS reservations (
   total_amount DECIMAL(10,2) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-

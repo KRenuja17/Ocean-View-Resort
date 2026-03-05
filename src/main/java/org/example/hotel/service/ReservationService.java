@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class ReservationService {
 
@@ -18,9 +19,10 @@ public class ReservationService {
 
     public ReservationService(ReservationDao reservationDao) {
         this.reservationDao = reservationDao;
-        roomRates.put("STANDARD", new BigDecimal("100.00"));
-        roomRates.put("DELUXE", new BigDecimal("180.00"));
-        roomRates.put("SUITE", new BigDecimal("250.00"));
+        // Updated rates to realistic LKR values
+        roomRates.put("STANDARD", new BigDecimal("15000.00"));
+        roomRates.put("DELUXE", new BigDecimal("25000.00"));
+        roomRates.put("SUITE", new BigDecimal("40000.00"));
     }
 
     public List<String> createReservation(Reservation reservation) {
@@ -45,6 +47,33 @@ public class ReservationService {
             }
         }
         return errors;
+    }
+
+    public List<String> updateReservation(Reservation reservation) {
+        List<String> errors = validate(reservation);
+        if (!errors.isEmpty()) {
+            return errors;
+        }
+
+        long nights = ChronoUnit.DAYS.between(reservation.getCheckIn(), reservation.getCheckOut());
+        BigDecimal rate = roomRates.get(reservation.getRoomType());
+        BigDecimal total = rate.multiply(new BigDecimal(nights));
+        reservation.setTotalAmount(total);
+
+        try {
+            reservationDao.update(reservation);
+        } catch (RuntimeException e) {
+            throw e;
+        }
+        return errors;
+    }
+
+    public void deleteReservation(String reservationNumber) {
+        reservationDao.delete(reservationNumber);
+    }
+
+    public Optional<Reservation> findByReservationNumber(String reservationNumber) {
+        return reservationDao.findByReservationNumber(reservationNumber);
     }
 
     private List<String> validate(Reservation r) {
