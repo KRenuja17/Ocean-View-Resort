@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css?v=3">
 </head>
 <body class="ovr-app">
-<nav class="navbar navbar-expand-lg navbar-light bg-white mb-5 shadow-sm sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-white mb-5 shadow-sm sticky-top no-print">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center gap-2" href="${pageContext.request.contextPath}/dashboard">
             <i class="bi bi-water text-primary"></i>
@@ -26,12 +26,12 @@
 <div class="container mb-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-4 no-print">
                 <h1 class="h3 fw-bold text-dark mb-0">Reports & Analytics</h1>
                 <div class="text-muted small">Generate insights about reservations and guests.</div>
             </div>
 
-            <div class="row g-4 mb-5">
+            <div class="row g-4 mb-5 no-print">
                 <!-- Date Range Report Card -->
                 <div class="col-md-6">
                     <div class="card h-100 shadow-sm border-0">
@@ -90,7 +90,7 @@
             </div>
 
             <c:if test="${not empty error}">
-                <div class="alert alert-danger d-flex align-items-center gap-2 mb-4">
+                <div class="alert alert-danger d-flex align-items-center gap-2 mb-4 no-print">
                     <i class="bi bi-exclamation-circle-fill"></i>
                     <div>${error}</div>
                 </div>
@@ -132,7 +132,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="card-footer bg-white border-top-0 py-3 text-end">
+                    <div class="card-footer bg-white border-top-0 py-3 text-end no-print">
                         <button onclick="window.print()" class="btn btn-sm btn-outline-secondary">
                             <i class="bi bi-printer me-1"></i> Print Report
                         </button>
