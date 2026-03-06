@@ -18,6 +18,12 @@ public class ReservationDaoImpl implements ReservationDao {
             "INSERT INTO reservations (reservation_number, guest_name, address, contact_number, room_type, check_in, check_out, total_amount) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
+    private static final String UPDATE_SQL =
+            "UPDATE reservations SET guest_name = ?, address = ?, contact_number = ?, room_type = ?, check_in = ?, check_out = ?, total_amount = ? WHERE reservation_number = ?";
+
+    private static final String DELETE_SQL =
+            "DELETE FROM reservations WHERE reservation_number = ?";
+
     private static final String SELECT_BY_RES_NO_SQL =
             "SELECT * FROM reservations WHERE reservation_number = ?";
 
@@ -26,6 +32,12 @@ public class ReservationDaoImpl implements ReservationDao {
 
     private static final String SELECT_CURRENT_STAYS_SQL =
             "SELECT * FROM reservations WHERE ? BETWEEN check_in AND DATE_SUB(check_out, INTERVAL 1 DAY) ORDER BY check_in";
+
+    private static final String SELECT_LAST_ID_SQL =
+            "SELECT MAX(id) FROM reservations";
+
+    private static final String SELECT_ALL_SQL =
+            "SELECT * FROM reservations ORDER BY check_in DESC";
 
     @Override
     public void create(Reservation reservation) {
@@ -48,6 +60,38 @@ public class ReservationDaoImpl implements ReservationDao {
     }
 
     @Override
+    public void update(Reservation reservation) {
+        try (Connection conn = DbUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(UPDATE_SQL)) {
+
+            ps.setString(1, reservation.getGuestName());
+            ps.setString(2, reservation.getAddress());
+            ps.setString(3, reservation.getContactNumber());
+            ps.setString(4, reservation.getRoomType());
+            ps.setDate(5, Date.valueOf(reservation.getCheckIn()));
+            ps.setDate(6, Date.valueOf(reservation.getCheckOut()));
+            ps.setBigDecimal(7, reservation.getTotalAmount());
+            ps.setString(8, reservation.getReservationNumber());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating reservation", e);
+        }
+    }
+
+    @Override
+    public void delete(String reservationNumber) {
+        try (Connection conn = DbUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(DELETE_SQL)) {
+
+            ps.setString(1, reservationNumber);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting reservation", e);
+        }
+    }
+
+    @Override
     public Optional<Reservation> findByReservationNumber(String reservationNumber) {
         try (Connection conn = DbUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(SELECT_BY_RES_NO_SQL)) {
@@ -62,6 +106,22 @@ public class ReservationDaoImpl implements ReservationDao {
             throw new RuntimeException("Error finding reservation", e);
         }
         return Optional.empty();
+    }
+
+    @Override
+    public List<Reservation> findAll() {
+        List<Reservation> list = new ArrayList<>();
+        try (Connection conn = DbUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SELECT_ALL_SQL);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                list.add(mapRow(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding all reservations", e);
+        }
+        return list;
     }
 
     @Override
@@ -101,6 +161,21 @@ public class ReservationDaoImpl implements ReservationDao {
         return list;
     }
 
+    @Override
+    public int getLastId() {
+        try (Connection conn = DbUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SELECT_LAST_ID_SQL);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error getting last reservation ID", e);
+        }
+        return 0;
+    }
+
     private Reservation mapRow(ResultSet rs) throws SQLException {
         Reservation r = new Reservation();
         r.setId(rs.getInt("id"));
@@ -115,4 +190,3 @@ public class ReservationDaoImpl implements ReservationDao {
         return r;
     }
 }
-
